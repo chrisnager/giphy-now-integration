@@ -41,8 +41,11 @@ module.exports = withUiHook(async ({ payload }) => {
         </Box>`
         }
       <AutoRefresh timeout=${3000} />
-      <Box>
+      <Box marginBottom="1rem">
         Created by <Link href="http://chrisnager.com" target="_blank">Chris Nager</Link> for the <Link href="https://zeit.co/hackathon" target="_blank">ZEIT Hackathon</Link>.
+      </Box>
+      <Box>
+        <Img width="150px" src="https://i.imgur.com/y1Sshcu.gif" />
       </Box>
     </Page>
   `;
