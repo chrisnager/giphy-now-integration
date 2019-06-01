@@ -1,5 +1,5 @@
 {
-  "name": "chrisnager-ui-hook",
+  "name": "giphy-ui-hook",
   "dependencies": {
     "@zeit/integration-utils": "latest",
     "axios": "^0.19.0"

@@ -1,5 +1,5 @@
 {
-  "name": "chrisnager-ui-hook",
+  "name": "giphy-ui-hook",
   "version": 2,
   "builds": [{ "src": "index.js", "use": "@now/node" }]
 }
