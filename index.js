@@ -33,6 +33,9 @@ module.exports = withUiHook(async ({ payload }) => {
           ${items && items.map(item => htm`<LI><Img src="${item.images.original.url}" /></LI>`)}
         </UL>
       </Container>
+      <Container>
+        Created by <Link href="http://chrisnager.com" target="_blank">Chris Nager</Link>
+      </Container>
     </Page>
   `;
 });
