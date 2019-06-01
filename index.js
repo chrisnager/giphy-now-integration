@@ -7,30 +7,35 @@ const GIPHY_API_KEY = 'I3Gl6RcFBwkIL0UC3IQb61op0S0Eeax8';
 let items = [];
 
 module.exports = withUiHook(async ({ payload }) => {
-  console.log({ payload });
+  const { action, clientState, query } = payload;
 
-  if (payload.action === 'submit') {
-    store.giphyApiKey = payload.clientState.giphyApiKey;
-    store.searchTerm = payload.clientState.searchTerm;
+  clientState.giphyApiKey = query.giphyApiKey || clientState.giphyApiKey;
+  clientState.searchTerm = query.searchTerm || clientState.searchTerm;
+
+  if (action === 'submit') {
+    store.giphyApiKey = clientState.giphyApiKey;
+    store.searchTerm = clientState.searchTerm;
   }
 
-  if (payload.clientState.searchTerm) {
+  if (query.searchTerm || clientState.searchTerm) {
     const url = 'http://api.giphy.com/v1/gifs/search';
 
     const params = {
-      q: payload.clientState.searchTerm,
-      api_key: payload.clientState.giphyApiKey || GIPHY_API_KEY,
+      q: clientState.searchTerm,
+      api_key: clientState.giphyApiKey || GIPHY_API_KEY,
       limit: 8,
     };
 
     await axios(url, { params })
-      .then(({ data: { data } }) => (items = data))
+      .then(({ data: { data } }) => {
+        items = data;
+      })
       .catch(error => console.error({ error }));
   }
 
   return htm`
     <Page>
-      <${Form} giphyApiKey="${payload.clientState.giphyApiKey}" searchTerm="${payload.clientState.searchTerm}" />
+      <${Form} giphyApiKey="${clientState.giphyApiKey}" searchTerm="${clientState.searchTerm}" />
       <${Gallery} items="${items}" />
       <${Credits} />
     </Page>
