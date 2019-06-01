@@ -1,6 +1,7 @@
 {
   "name": "chrisnager-ui-hook",
   "dependencies": {
-    "@zeit/integration-utils": "latest"
+    "@zeit/integration-utils": "latest",
+    "axios": "^0.19.0"
   }
 }
