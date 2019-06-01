@@ -10,12 +10,14 @@ module.exports = withUiHook(async ({ payload }) => {
 
   if (action === 'submit') store.searchTerm = clientState.searchTerm;
 
-  await axios(`http://api.giphy.com/v1/gifs/search?q=${clientState.searchTerm}&api_key=${GIPHY_API_KEY}&limit=8`)
-    .then(({ data: { data } }) => {
-      // console.log(data);
-      items = data;
-    })
-    .catch(error => console.error({ error }));
+  if (clientState.searchTerm) {
+    await axios(`http://api.giphy.com/v1/gifs/search?q=${clientState.searchTerm}&api_key=${GIPHY_API_KEY}&limit=8`)
+      .then(({ data: { data } }) => {
+        // console.log(data);
+        items = data;
+      })
+      .catch(error => console.error({ error }));
+  }
 
   // console.log({ payload });
   // console.log('outside', items[2].images);
@@ -41,7 +43,6 @@ module.exports = withUiHook(async ({ payload }) => {
               )
         }
       </Box>
-      <AutoRefresh timeout=${3000} />
       <Box marginBottom="1rem">
         Created by <Link href="http://chrisnager.com" target="_blank">Chris Nager</Link> for the <Link href="https://zeit.co/hackathon" target="_blank">ZEIT Hackathon</Link>.
       </Box>
