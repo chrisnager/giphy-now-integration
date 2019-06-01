@@ -1,12 +1,16 @@
 const axios = require('axios');
 const { withUiHook, htm } = require('@zeit/integration-utils');
 
+const store = { searchTerm: '' };
 const GIPHY_API_KEY = 'I3Gl6RcFBwkIL0UC3IQb61op0S0Eeax8';
-const searchTerm = 'cat';
 let items = [];
 
 module.exports = withUiHook(async ({ payload }) => {
-  await axios(`http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=${GIPHY_API_KEY}&limit=3`)
+  const { clientState, action } = payload;
+
+  if (action === 'submit') store.searchTerm = clientState.searchTerm;
+
+  await axios(`http://api.giphy.com/v1/gifs/search?q=${clientState.searchTerm}&api_key=${GIPHY_API_KEY}&limit=3`)
     .then(({ data: { data } }) => {
       // console.log(data);
       items = data;
@@ -19,7 +23,10 @@ module.exports = withUiHook(async ({ payload }) => {
   return htm`
     <Page>
       <Container>
-        <Button>Load GIF</Button>
+        <Input label="Search for GIFs" placeholder="cat" name="searchTerm" value="${clientState.searchTerm || ''}" />
+      </Container>
+      <Container>
+        <Button>Submit</Button>
       </Container>
       <Container>
         <UL>
