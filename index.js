@@ -6,10 +6,10 @@ const initialStore = { search: '', errored: false, apiKey: '', items: [] };
 
 module.exports = withUiHook(async ({ payload }) => {
   const { query, clientState, action } = payload;
-  const search = (query && query.Search) || clientState.search || '';
-  const apiKey = (query && query.ApiKey) || clientState.apiKey || '';
-
+  const search = query.Search || clientState.search || '';
+  const apiKey = query.ApiKey || clientState.apiKey || '';
   let store = { ...initialStore, search, apiKey };
+
   if (action === 'submit') store = { ...store, errored: !search };
   if (action === 'reset') store = initialStore;
 
