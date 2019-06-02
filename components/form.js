@@ -10,7 +10,7 @@ const Form = ({ searchTerm = '', errored = false, giphyApiKey = '' }) => htm`
           placeholder="pusheen"
           name="searchTerm"
           value="${searchTerm}"
-          errored="${errored}"
+          errored=${errored}
         />
       </Box>
       <Box width="50%" paddingLeft="0.5rem">
@@ -23,7 +23,7 @@ const Form = ({ searchTerm = '', errored = false, giphyApiKey = '' }) => htm`
       </Box>
     </Box>
     <Box marginBottom="2rem">
-      <Button>Submit</Button>
+      <Button themeColor="blue">Submit</Button>
     </Box>
   </Box>
 `;
