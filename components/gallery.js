@@ -24,7 +24,9 @@ const Gallery = ({ items }) => htm`
                 overflow="hidden"
                 backgroundColor="#000"
               >
-                <Img src="${item.images.original.url}" width="100%" />
+                <Link href="${item.url}" target="_blank">
+                  <Img src="${item.images.downsized_medium.url}" width="100%" />
+                </Link>
               </Box>
             `,
           )
