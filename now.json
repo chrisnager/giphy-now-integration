@@ -1,5 +1,6 @@
 {
   "name": "giphy-ui-hook",
   "version": 2,
+  "alias": "steez.tech",
   "builds": [{ "src": "index.js", "use": "@now/node" }]
 }
