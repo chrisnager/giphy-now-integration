@@ -3,7 +3,6 @@ const { htm } = require('@zeit/integration-utils');
 const Gallery = ({ items }) => htm`
   <Box
     minHeight="310px"
-    marginBottom="1rem"
     border="1px solid"
     padding="0.25rem"
     display="flex"

@@ -2,7 +2,7 @@ const axios = require('axios');
 const { withUiHook, htm } = require('@zeit/integration-utils');
 const { Form, Gallery, Credits } = require('./components');
 
-const store = { giphyApiKey: '', searchTerm: '' };
+const store = { giphyApiKey: '', searchTerm: '', errored: false };
 const GIPHY_API_KEY = 'I3Gl6RcFBwkIL0UC3IQb61op0S0Eeax8';
 let items = [];
 
@@ -17,7 +17,7 @@ module.exports = withUiHook(async ({ payload }) => {
     store.searchTerm = clientState.searchTerm;
   }
 
-  if (query.searchTerm || clientState.searchTerm) {
+  if (clientState.searchTerm) {
     const url = 'http://api.giphy.com/v1/gifs/search';
 
     const params = {
@@ -27,17 +27,30 @@ module.exports = withUiHook(async ({ payload }) => {
     };
 
     await axios(url, { params })
-      .then(({ data: { data } }) => {
-        items = data;
-      })
+      .then(({ data: { data } }) => (items = data))
       .catch(error => console.error({ error }));
   }
 
+  if (clientState.searchTerm) {
+    store.errored = false;
+  } else {
+    store.errored = true;
+  }
+
+  const { giphyApiKey, searchTerm } = clientState;
+  const { errored } = store;
+
   return htm`
     <Page>
-      <${Form} giphyApiKey="${clientState.giphyApiKey}" searchTerm="${clientState.searchTerm}" />
-      <${Gallery} items="${items}" />
-      <${Credits} />
+      <Fieldset>
+        <FsContent>
+          <${Form} ...${{ giphyApiKey, searchTerm, errored }} />
+          <${Gallery} ...${{ items }} />
+        </FsContent>
+        <FsFooter>
+          <${Credits} />
+        </FsFooter>
+      </Fieldset>
     </Page>
   `;
 });
