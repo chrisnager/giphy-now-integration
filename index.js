@@ -16,7 +16,7 @@ module.exports = withUiHook(async ({ payload }) => {
   if (action !== 'reset' && search) {
     const url = 'http://api.giphy.com/v1/gifs/search';
     const GIPHY_API_KEY = 'I3Gl6RcFBwkIL0UC3IQb61op0S0Eeax8';
-    const params = { q: search, api_key: apiKey || GIPHY_API_KEY, limit: 8 };
+    const params = { q: search, api_key: apiKey.length === 32 ? apiKey : GIPHY_API_KEY, limit: 8 };
     await axios(url, { params }).then(({ data: { data } }) => (store.items = data));
   }
 

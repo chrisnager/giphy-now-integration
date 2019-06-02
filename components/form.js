@@ -24,8 +24,8 @@ const Form = ({ search, errored, apiKey }) => htm`
       </Box>
     </Box>
     <Box marginBottom="2.25rem">
-      <Button action="submit" width="auto" themeColor="blue">Submit</Button>
-      <Button action="reset" width="auto" secondary>Reset</Button>
+      <Button action="submit" width="160">Submit</Button>
+      <Button action="reset" width="160" secondary>Reset</Button>
     </Box>
   </Box>
 `;
