@@ -24,7 +24,7 @@ const Form = ({ search, errored, apiKey }) => htm`
       </Box>
     </Box>
     <Box marginBottom="2.25rem">
-      <Button action="submit" width="128">Search</Button>
+      <Button action="search" width="128">Search</Button>
       <Button action="trending" width="128" themeColor="blue">Trending</Button>
       <Button action="random" width="128" themeColor="red">Random</Button>
       <Button action="reset" width="128" secondary>Reset</Button>
