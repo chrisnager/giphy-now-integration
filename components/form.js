@@ -2,9 +2,10 @@ const { htm } = require('@zeit/integration-utils');
 
 const Form = ({ search, errored, apiKey }) => htm`  
   <Box>
-    <Box marginBottom="1rem" display="flex">
-      <Box width="50%" paddingRight="0.5rem">
+    <Box marginBottom="0.75rem" display="flex">
+      <Box width="50%" paddingRight="0.125rem">
         <Input
+          autoFocus
           width="100%"
           label="Search GIFs"
           placeholder="pusheen"
@@ -13,7 +14,7 @@ const Form = ({ search, errored, apiKey }) => htm`
           errored=${errored}
         />
       </Box>
-      <Box width="50%" paddingLeft="0.5rem">
+      <Box width="50%" paddingLeft="0.125rem">
         <Input
           width="100%"
           label="GIPHY API key (optional)"
@@ -22,9 +23,9 @@ const Form = ({ search, errored, apiKey }) => htm`
         />
       </Box>
     </Box>
-    <Box marginBottom="2rem">
-      <Button action="submit" themeColor="blue">Submit</Button>
-      <Button action="reset" secondary>Reset</Button>
+    <Box marginBottom="2.25rem">
+      <Button action="submit" width="auto" themeColor="blue">Submit</Button>
+      <Button action="reset" width="auto" secondary>Reset</Button>
     </Box>
   </Box>
 `;
