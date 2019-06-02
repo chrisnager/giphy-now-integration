@@ -17,7 +17,7 @@ module.exports = withUiHook(async ({ payload }) => {
   const GIPHY_API_KEY = 'I3Gl6RcFBwkIL0UC3IQb61op0S0Eeax8';
   const baseParams = { api_key: apiKey.length === 32 ? apiKey : GIPHY_API_KEY, rating: 'pg-13' };
 
-  if (action === 'search' && search) {
+  if ((action === 'search' || action === 'view') && search) {
     const { data } = await axios(`${url}/search`, { params: { ...baseParams, q: search, limit: 8 } });
     store.items = data.data;
   }
